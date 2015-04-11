@@ -5,9 +5,16 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <% @doc.css(@main_menu_elements_css_class).each do |category| %>
-          <li><a><%= category.text %></li></a>
-        <% end %>
+        <li><%= link_to 'News', root_path %></li>
+        <li><%= link_to 'Favorites', favorites_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                <li><%= link_to current_user.name, root_path %></li>
+                <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
+              <% else %>
+                <li><%= link_to 'Log in', new_user_session_path %></li>
+              <% end %>
       </ul>
     </div>
   </div>

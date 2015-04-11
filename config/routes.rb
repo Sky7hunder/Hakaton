@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :favorites
+
+  devise_for :users
   get 'parser/gamebomb'
-  #get 'parser/show'
+  get 'parser/show'=> 'parser#show'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

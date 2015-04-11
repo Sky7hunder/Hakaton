@@ -7,24 +7,27 @@ class ParserController < ApplicationController
   # подключаем Nokogiri
   require 'nokogiri'
 
+  before_action :include_gamebomb
+
   def show
+    # Parse the URI and retrieve it to a temporary file
+    article_tmp_file = open(params[:article_link])
+
+    # Parse the contents of the temporary file as HTML
+    @article = Nokogiri::HTML(article_tmp_file)
 
   end
 
   def gamebomb
+    @favorites = Favorite.all
     # Parse the URI and retrieve it to a temporary file
     news_tmp_file = open('http://gamebomb.ru/')
 
     # Parse the contents of the temporary file as HTML
     @doc = Nokogiri::HTML(news_tmp_file)
 
-    # Define the css selectors to be used for extractions, most
-    @article_css_class         =".items-list .gbnews-listShort"
-    @article_date_css_class    =".sub"
-    @article_header_css_class  ="h3"
-    @article_text_css_class    ="p"
-    @main_menu_elements_css_class ="#header-menu .main-menu li"
-    @main_menu_links_css_class ="a"
+    # @article_link = @doc.css('.items-list .gbnews-listShort a:first').attr('href').text
+
 =begin
     # extract all the categories
     categories = doc.css(main_menu_elements_css_class)
@@ -109,5 +112,22 @@ class ParserController < ApplicationController
 
     render :html => html
 =end
+  end
+
+  private
+  def include_gamebomb
+    # Parse the URI and retrieve it to a temporary file
+    news_tmp_file = open('http://gamebomb.ru/')
+
+    # Parse the contents of the temporary file as HTML
+    @doc = Nokogiri::HTML(news_tmp_file)
+
+    # Define the css selectors to be used for extractions, most
+    @article_css_class         =".items-list .gbnews-listShort"
+    @article_date_css_class    =".sub"
+    @article_header_css_class  ="h3"
+    @article_text_css_class    ="p"
+    @main_menu_elements_css_class ="#header-menu .main-menu li"
+    @main_menu_links_css_class ="a"
   end
 end

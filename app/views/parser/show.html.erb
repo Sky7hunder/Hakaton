@@ -1,0 +1,22 @@
+<div class="well">
+  <a href="#" id="styles-change">Click</a>
+  <div class="row">
+    <div class="col-md-3">
+      <img style="width: 200px;" src="http://gamebomb.ru<%= @article.css('.post-content > div:nth-child(3) img').attr('src').text %>" alt="<%= @article.css('.post-content > div:nth-child(3) img').attr('alt').text %>">
+    </div>
+    <div class="alert alert-dismissible active col-md-9">
+      <strong class="lead text-info"><%= @article.css('.post-content h1').text %></strong><hr>
+      <small><%= @article.css('.post-content > div:nth-child(2) > div > div').text  %></small>
+    </div>
+  </div>
+  <blockquote>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <p class="tab-content">
+          <%= @article.css('.post-content > div:nth-child(3) > div:nth-child(2) p').text %>
+        </p>
+      </div>
+    </div>
+  </blockquote>
+</div>
