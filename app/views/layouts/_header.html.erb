@@ -1,0 +1,14 @@
+<div class="navbar navbar-fixed-top navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <h3><%= link_to 'PARSER', root_path %></h3>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <% @doc.css(@main_menu_elements_css_class).each do |category| %>
+          <li><a><%= category.text %></li></a>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
